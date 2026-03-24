@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <title>Nu există țară pentru părinți care se întorc la serviciu — Dela0.ro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600;700&family=Karma:ital,wght@0,400;1,400&family=Titillium+Web:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f9f5ef;
+            color: #2a1f18;
+            font-family: 'Karma', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: 'Fira Sans', sans-serif;
+            color: #714b3a;
+        }
+
+        h1 {
+            font-weight: 700;
+        }
+
+        h2, h3, h4 {
+            font-weight: 600;
+        }
+
+        a {
+            color: #4db2ec;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #714b3a;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== LAYOUT — SCROLL SECTIONS ===== */
+        .scroll-section {
+            position: relative;
+        }
+
+        .scroll-section::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .scroll-graphic {
+            position: sticky;
+            top: 0;
+            width: 58%;
+            height: 100vh;
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .scroll-steps {
+            width: 38%;
+            margin-left: 58%;
+            padding: 40vh 0;
+        }
+
+        .step {
+            padding: 1rem 1.5rem;
+            margin-bottom: 40vh;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== LAYOUT — FLOW SECTIONS ===== */
+        .flow-section {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        /* ===== COMPONENTS ===== */
+
+        /* Section heading */
+        .section-heading {
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 600;
+            color: #714b3a;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            line-height: 1.3;
+        }
+
+        .section-heading:first-child {
+            margin-top: 0;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: #FBBE3B;
+            padding: 2px 6px;
+            font-weight: 700;
+            border-radius: 3px;
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            font-family: 'Karma', Georgia, serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #714b3a;
+            background: #FFF7E8;
+            border-left: 4px solid #FBBE3B;
+            border-radius: 0 8px 8px 0;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .pull-quote cite {
+            font-family: 'Titillium Web', sans-serif;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: #777;
+            display: block;
+            margin-top: 0.75rem;
+        }
+
+        .caption, figcaption, .source-label {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.8rem;
+            color: #c4a882;
+            line-height: 1.5;
+        }
+
+        /* Big stat */
+        .big-stat {
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            color: #714b3a;
+            line-height: 1.1;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .big-stat .stat-accent {
+            color: #FBBE3B;
+        }
+
+        /* Stat colors */
+        .stat-negative {
+            color: #b33a3a;
+        }
+
+        .stat-positive {
+            color: #4a7a44;
+        }
+
+        /* Rights card */
+        .rights-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-top: 3px solid #FBBE3B;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .rights-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.13);
+        }
+
+        /* Action card */
+        .action-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-top: 3px solid #FBBE3B;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.13);
+        }
+
+        .action-card .number-badge {
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            background: #FBBE3B;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Employer card */
+        .employer-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Tab bar */
+        .tab-bar {
+            display: flex;
+            background: #714b3a;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+
+        .tab-item {
+            padding: 0.75rem 1.25rem;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.9rem;
+            border: none;
+            background: transparent;
+            transition: color 0.2s, background 0.2s;
+            user-select: none;
+        }
+
+        .tab-item:hover {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .tab-item.active {
+            color: #fff;
+            border-bottom: 3px solid #FBBE3B;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Tab content */
+        .tab-content {
+            padding: 1.5rem;
+            font-family: 'Karma', Georgia, serif;
+            background: #fff;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll indicator bounce */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        .scroll-indicator {
+            animation: bounce 1.4s ease-in-out infinite;
+        }
+
+        /* ===== UTILITY ===== */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Hero section */
+        .hero-illustrations {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+        }
+        .hero-illust {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .hero-illust:first-child {
+            position: relative;
+        }
+        .hero-illust.active {
+            opacity: 1;
+        }
+        .supertitle {
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #FBBE3B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .byline {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .byline a {
+            color: #714b3a;
+            text-decoration: none;
+            border-bottom: 1px solid #FBBE3B;
+        }
+        .step-content {
+            background: rgba(255, 247, 232, 0.92);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+        }
+
+        /* Author intro */
+        .author-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .author-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            border: 3px solid #FBBE3B;
+        }
+        .author-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .author-intro p {
+            font-family: 'Karma', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #714b3a;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .section-illust {
+            max-width: 60%;
+            max-height: 30vh;
+            object-fit: contain;
+            opacity: 0.7;
+        }
+
+        #itm-charts-container,
+        #return-chart {
+            width: 100%;
+            max-width: 380px;
+        }
+
+        /* Rights grid */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            padding: 1rem;
+            max-width: 500px;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .flow-illustration {
+            display: block;
+            max-width: 400px;
+            margin: 2rem auto;
+            opacity: 0.4;
+        }
+
+        .employer-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        #county-tilemap {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #FBBE3B;
+            color: #714b3a;
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover {
+            background: #e5a52e;
+            transform: translateY(-2px);
+        }
+        .article-footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: #714b3a;
+            color: rgba(255,255,255,0.8);
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.9rem;
+        }
+        .article-footer a {
+            color: #FBBE3B;
+            text-decoration: none;
+        }
+        .article-footer p {
+            margin: 0.3rem 0;
+        }
+
+        #butaforie .scroll-graphic {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #drepturi .scroll-graphic,
+        #ce-poti-face .scroll-graphic {
+            align-items: flex-start;
+            padding-top: 2rem;
+        }
+
+        #drepturi .scroll-steps {
+            padding-left: 1.5rem;
+        }
+
+        #action-cards-container {
+            margin-bottom: 2rem;
+        }
+
+        #mofturi {
+            margin-top: 40rem;
+        }
+
+        #povesti {
+            margin-top: 20rem;
+        }
+
+        #angajatori,
+        #noroc {
+            margin-top: 4rem;
+        }
+
+        #abuse-timeline {
+            padding: 1.5rem;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .timeline-line {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0d5c8;
+        }
+
+        .timeline-node {
+            position: relative;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .timeline-node:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -40px;
+            top: 2px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #b33a3a;
+            border: 3px solid #f9f5ef;
+        }
+
+        .timeline-year {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.8rem;
+            color: #b33a3a;
+            margin-left: 0.5rem;
+        }
+
+        .timeline-quote {
+            font-family: 'Karma', Georgia, serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #b33a3a;
+            line-height: 1.4;
+            margin: 0.3rem 0;
+        }
+
+        .timeline-outcome {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* ===== RESPONSIVE — TABLET & MOBILE (<=1024px) ===== */
+        .europe-tabs-container {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            /* Overlay layout: graphic sticks behind, text scrolls over */
+            .scroll-section {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .scroll-section::after {
+                display: none;
+            }
+
+            .scroll-graphic {
+                grid-row: 1;
+                grid-column: 1;
+                position: sticky;
+                top: 0;
+                width: 100%;
+                height: 100vh;
+                float: none;
+                z-index: 0;
+            }
+
+            .scroll-steps {
+                grid-row: 1;
+                grid-column: 1;
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                margin-left: 0;
+                padding: 70vh 1.5rem 40vh;
+            }
+
+            .step {
+                margin-bottom: 30vh;
+            }
+
+            .step-content {
+                background: rgba(255, 255, 255, 0.88);
+                backdrop-filter: blur(4px);
+            }
+
+            /* Smaller fonts */
+            body {
+                font-size: 16px;
+            }
+
+            .section-heading {
+                font-size: 1.5rem;
+            }
+
+            .pull-quote {
+                font-size: 1.05rem;
+            }
+
+            .big-stat {
+                font-size: 3.5rem;
+            }
+
+            .flow-section {
+                padding: 3rem 1.5rem;
+            }
+
+            /* Center graphic content */
+            #drepturi .scroll-graphic,
+            #ce-poti-face .scroll-graphic {
+                align-items: center;
+                padding-top: 0;
+            }
+
+            /* Cards: show one at a time via grid overlap */
+            .rights-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                gap: 0;
+                padding: 1rem;
+                max-width: 350px;
+            }
+
+            .rights-card {
+                grid-row: 1;
+                grid-column: 1;
+                padding: 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            #action-cards-container {
+                display: grid;
+                grid-template-columns: 1fr;
+                max-width: 380px;
+            }
+
+            #action-cards-container > h3 {
+                grid-row: 1;
+            }
+
+            #action-cards-container .action-card {
+                grid-row: 2;
+                grid-column: 1;
+                font-size: 0.9rem;
+            }
+
+            /* Charts and timeline: full width */
+            #itm-charts-container,
+            #return-chart {
+                max-width: 90%;
+            }
+
+            #abuse-timeline {
+                max-width: 100%;
+            }
+
+            /* Images */
+            .hero-illustrations {
+                width: 70%;
+                max-width: 450px;
+            }
+
+            .hero-illust {
+                max-height: 60vh;
+            }
+
+            .section-illust {
+                max-height: 25vh;
+                max-width: 50%;
+            }
+
+            .flow-illustration {
+                max-width: 80%;
+            }
+
+            /* Reduced section margins */
+            #mofturi {
+                margin-top: 8rem;
+            }
+
+            #povesti {
+                margin-top: 6rem;
+            }
+
+            #angajatori,
+            #noroc {
+                margin-top: 3rem;
+            }
+
+            .employer-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-item {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ===== RESPONSIVE — MOBILE ONLY (<768px) ===== */
+        @media (max-width: 767px) {
+            body {
+                font-size: 15px;
+            }
+
+            .scroll-steps {
+                padding: 60vh 1rem 30vh;
+            }
+
+            .step {
+                margin-bottom: 20vh;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .section-heading {
+                font-size: 1.3rem;
+            }
+
+            .big-stat {
+                font-size: 2.8rem;
+            }
+
+            .pull-quote {
+                font-size: 0.95rem;
+            }
+
+            .flow-section {
+                padding: 2rem 1rem;
+            }
+
+            .rights-card {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .rights-card p {
+                margin-bottom: 0;
+            }
+
+            .action-card {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            #abuse-timeline {
+                padding: 0.75rem;
+            }
+
+            .timeline-line {
+                padding-left: 30px;
+            }
+
+            .timeline-marker {
+                left: -30px;
+                width: 18px;
+                height: 18px;
+            }
+
+            .timeline-quote {
+                font-size: 0.85rem;
+            }
+
+            .hero-illustrations {
+                width: 60%;
+                max-width: 300px;
+            }
+
+            .hero-illust {
+                max-height: 50vh;
+            }
+
+            .section-illust {
+                max-height: 20vh;
+                max-width: 40%;
+            }
+
+            #mofturi {
+                margin-top: 5rem;
+            }
+
+            #povesti {
+                margin-top: 4rem;
+            }
+
+            #angajatori,
+            #noroc {
+                margin-top: 2rem;
+            }
+
+            #europe-map {
+                width: 100%;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Hero (SCROLL) -->
+    <section id="hero" class="scroll-section">
+        <div class="scroll-graphic" id="hero-graphic">
+            <div class="hero-illustrations">
+                <img src="gbtw1.jpg" alt="Ilustrație: mamă ținând în brațe un nou-născut" class="hero-illust active">
+                <img src="gbtw2.jpg" alt="Ilustrație: mamă ținând copilul în brațe" class="hero-illust" loading="lazy">
+                <img src="gbtw3.jpg" alt="Ilustrație: mamă purtând copilul" class="hero-illust" loading="lazy">
+            </div>
+            <div class="scroll-indicator">
+                <span>▼</span>
+            </div>
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <p class="supertitle">Investigație Dela0.ro</p>
+                    <h1>Nu există țară pentru părinți care se întorc la serviciu</h1>
+                    <p class="byline">De <a href="https://beta.dela0.ro/acasa/dela0-cine-suntem/" target="_blank">Diana Oncioiu</a></p>
+                </div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-content light">
+                    <blockquote class="pull-quote">Că ne place, că nu ne place, și mămicile au nevoie de servicii medicale importante în perioada în care au un copil mic. Și atunci, în această logică, trebuie să contribuie cu o sumă infim de mică raportat la beneficiile pe care sistemul medical le pune în practică.<cite>Premierul Ilie Bolojan, justificând decizia de a taxa cu 10% indemnizația pentru creșterea copilului</cite></blockquote>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-content light">
+                    <blockquote class="pull-quote">Să știți că avem unul dintre cele mai lungi concedii de maternitate din Europa. Nu are nicio țară mai lung decât România. Nu e o problemă, e foarte bine. Trebuie să luăm niște măsuri să încurajăm rata natalității - dar atâta cât ne putem permite!<cite>Premierul Ilie Bolojan</cite></blockquote>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-content light">
+                    <p>Decizia de a reduce indemnizația pentru creșterea copilului a fost una dintre primele măsuri bugetare luate de Guvernul Bolojan. Formal se mai strâng niște bani în vistieria statului. Pe fond, însă, <span class="highlight">niciuna dintre problemele care afectează revenirea din concediul de creștere a copilului nu a fost examinată</span>, și cu atât mai puțin rezolvată.</p>
+                </div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-content light">
+                    <div class="big-stat">135.000<span class="stat-accent"> părinți</span></div>
+                    <p>reveneau în 2025 în câmpul muncii după un concediu de creștere a copilului. <span class="highlight">85% dintre aceștia sunt mame.</span> Aproape 25% au revenit la muncă înainte să împlinească copilul un an.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Argument (FLOW) -->
+    <section id="argument" class="flow-section">
+        <h2 class="section-heading fade-in">Cum am ajuns să documentăm acest subiect</h2>
+
+        <div class="author-intro fade-in">
+            <div class="author-photo">
+                <img src="diana.png" alt="Diana Oncioiu, autoarea articolului" loading="lazy">
+            </div>
+            <p>Am revenit în activitate după un concediu de creșterea a copilului de aproape doi ani.</p>
+        </div>
+
+        <p class="fade-in">În vara lui 2024 povesteam pe rețelele de socializare despre cât de dificilă poate să fie această revenire pentru o femeie. Vorbeam de pe o poziție privilegiată, care viza mai degrabă acomodarea unor stări emoționale noi și adaptarea la un nou program, nicidecum privarea de drepturi sau existența unui angajator interesat să scape de mine. Multe mame se confruntă cu probleme din a doua categorie.</p>
+
+        <p class="fade-in">Încurajată de comentariile celor care invocau absența acestui subiect de pe agenda publică am decis să documentez pentru Dela0.ro <span class="highlight">cum arată reintegrarea mamelor întoarse din concediul de creșterea a copilului</span> în România.</p>
+
+        <p class="fade-in">Între timp, documentarea a căpătat proporții mamut.</p>
+
+        <p class="fade-in">Am vorbit cu <span class="highlight">18 mame</span>, am studiat actele judiciare din patru procese în care au fost contestate decizii de concediere luate la revenirea din maternitate, am solicitat date de la <span class="highlight">instituții publice</span> (precum Inspectoratele Teritoriale de Muncă sau Agenția Națională de Plăți și Inspecție Socială), <span class="highlight">am pus întrebări</span> Ministerului Muncii, am discutat cu avocați specializați în litigii de muncă, dar și cu activiști pentru drepturile femeilor. Nu în ultimul rând, am trimis solicitări de presă către 18 mari angajatori publici și privați, pentru a înțelege cum arată în practică revenirea la muncă din concediul de creștere a copilului.</p>
+
+        <p class="fade-in">În ciuda acestui efort documentar considerabil ce am obținut este o vedere parțială. Și asta pentru că toate cele 18 mame cu care am discutat ocupă poziții din zona gulerelor albe: finanțe, bănci, IT, ONG, activism, educație, cultură, consultanță sau vânzări. Tocmai de aceea articolul de față nu este doar o încercare de a explica un proces social eșuat, ci și un apel la mai multe mărturii. Mărturii din partea femeilor ale căror voci nu se aud niciodată. Iar acolo unde vocile nu se aud, abuzurile sunt și mai mari.</p>
+
+        <p class="fade-in">Odată cu publicarea acestui articol, ne-am propus la Dela0.ro să lansăm și un apel. Vrem să realizăm o hartă a abuzurilor comise față de mamele revenite la muncă după concediul de creștere a copilului. Dar pentru asta e necesar un efort colectiv.</p>
+
+        <p class="fade-in">Mai multe detalii vor fi de găsit la finalul articolului. Până acolo, iată faptele!</p>
+    </section>
+
+    <!-- Section 3: Butaforie (SCROLL) -->
+    <section id="butaforie" class="scroll-section">
+        <div class="scroll-graphic">
+            <div id="donut-chart"></div>
+            <img src="gbtw4.jpg" alt="Ilustrație: mamă ridicând copilul în brațe" class="section-illust" loading="lazy">
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <div class="big-stat">69<span class="stat-accent">%</span></div>
+                    <p>dintre mamele care se întorc la muncă după concediul de creștere a copilului spun că au avut o <span class="stat-negative">experiență negativă</span> de reintegrare. Doar <span class="stat-positive">31%</span> spun că reintegrarea a fost o experiență pozitivă.</p>
+                </div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-content light">
+                    <p>Rezultatele se bazează pe mărturiile a <span class="highlight">1.500 de mame</span> și stau la baza studiului „Ce rost are mama în România?", publicat în martie 2024 și realizat de Andra Pintican, specialistă în resurse umane, fondatoarea Școlii de HR și a Centrului de Carieră.</p>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-content light">
+                    <p>Realitatea ne arată că simpla existență a unui cadru legal nu e o garanție a respectării lui. Statul nu ar trebui să fie interesat doar de adoptarea unor norme, ci și de cum sunt ele aplicate ulterior, de capacitatea mecanismelor de control de a sancționa neaplicarea.</p>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-content light">
+                    <p>Ordonanța de urgență care privește protecția maternității a fost adoptată în 2003 pentru îndeplinirea cerințelor asumate în procesul de aderare la Uniunea Europeană. Practic, <span class="highlight">OUG 96/2003 nu protejează femeia care revine la locul de muncă după concediul de creștere a copilului</span> decât dacă e în situația în care încă alăptează.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Drepturi (SCROLL) -->
+    <section id="drepturi" class="scroll-section">
+        <div class="scroll-graphic">
+            <div class="rights-grid" id="rights-container">
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">🛡️</div>
+                    <h4>Protecție împotriva concedierii</h4>
+                    <p>Angajatorul nu te poate concedia în primele 6 luni de la revenirea din CIC. Există doar câteva excepții.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">🤱</div>
+                    <h4>Pauză pentru alăptare</h4>
+                    <p>Dacă încă alăptezi, poți lua 2 ore pauză în timpul programului sau îți poți reduce programul la 6 ore.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">🌙</div>
+                    <h4>Fără muncă de noapte</h4>
+                    <p>Dacă alăptezi, angajatorul nu te poate obliga să lucrezi noaptea. Nu poți munci în condiții insalubre.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">📋</div>
+                    <h4>Reintegrare profesională</h4>
+                    <p>Ai dreptul la un program de reintegrare de minimum 5 zile lucrătoare.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">💰</div>
+                    <h4>Beneficii egale</h4>
+                    <p>Ai dreptul la toate beneficiile primite de colegi cât ai fost în CIC, inclusiv măriri salariale.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">🏠</div>
+                    <h4>Telemuncă</h4>
+                    <p>4 zile pe lună de lucru la domiciliu sau telemuncă, până când copilul împlinește 11 ani.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">⏰</div>
+                    <h4>Program flexibil</h4>
+                    <p>Poți solicita program individualizat. Angajatorul este obligat să motiveze refuzul.</p>
+                </div>
+                <div class="rights-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease">
+                    <div class="card-icon">🏥</div>
+                    <h4>Concediu medical copil</h4>
+                    <p>Concediu medical plătit pentru copii de până la 12 ani, max 45 zile calendaristice pe an per copil.</p>
+                </div>
+            </div>
+            <p class="source-label" style="position:absolute;bottom:1rem;left:1rem;right:1rem;text-align:center;">SURSE: OUG 96/2003, Legea 202/2002, Legea 53/2003, OUG 158/2005, Legea 76/2002</p>
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0"><div class="step-content light"><h3 class="section-heading">Ce drepturi ai la revenirea din CIC?</h3><p>Există o serie de drepturi legale pe care le ai la revenirea din concediul de creștere a copilului. Iată care sunt.</p></div></div>
+            <div class="step" data-step="1"><div class="step-content light"><p>Angajatorul <span class="highlight">nu te poate concedia</span> în primele șase luni de la momentul revenirii din concediul pentru creșterea copilului.</p></div></div>
+            <div class="step" data-step="2"><div class="step-content light"><p>Dacă încă alăptezi îți poți lua <span class="highlight">două ore pauză</span> în timpul programului sau îți poți reduce programul de lucru la șase ore.</p></div></div>
+            <div class="step" data-step="3"><div class="step-content light"><p>Angajatorul <span class="highlight">nu te poate obliga să lucrezi noaptea</span>. Nu poți munci în condiții insalubre sau greu de tolerat fizic.</p></div></div>
+            <div class="step" data-step="4"><div class="step-content light"><p>Ai dreptul la un <span class="highlight">program de reintegrare profesională</span> a cărui durată nu trebuie să fie mai mică de cinci zile lucrătoare.</p></div></div>
+            <div class="step" data-step="5"><div class="step-content light"><p>Ai dreptul la <span class="highlight">toate beneficiile</span> primite de colegii tăi cât timp ai fost în concediu, inclusiv la mărire salarială.</p></div></div>
+            <div class="step" data-step="6"><div class="step-content light"><p>Ai dreptul la <span class="highlight">telemuncă</span> patru zile pe lună, până când copilul împlinește 11 ani.</p></div></div>
+            <div class="step" data-step="7"><div class="step-content light"><p>Poți solicita <span class="highlight">program individualizat</span> de muncă. Angajatorul este obligat să motiveze refuzul.</p></div></div>
+        </div>
+    </section>
+
+    <!-- Section 5: Mofturi (FLOW) -->
+    <section id="mofturi" class="flow-section">
+    <h2 class="section-heading fade-in">Despre drepturi ca mofturi</h2>
+
+    <p class="fade-in">În ultimii 26 de ani au existat <span class="highlight">doar două interpelări în Parlament</span> pe tema revenirii mamelor la muncă după concediul de creștere a copilului. Una e din 2011, alta din 2024. Interpelarea din 2011 a fost formulată de o parlamentară UDMR, iar cea din 2024 de un parlamentar independent. Cea din 2011 aborda chiar tema cursurilor / programelor / training-urilor care să facă reintegrarea mai ușoară.</p>
+
+    <p class="fade-in">Indiferența autorităților cu privire la revenirea mamelor la locul de muncă e paradoxală având în vedere preocuparea constantă, la nivel declarativ, față de scăderea demografică. Creșterea natalității și, mai nou, productivitatea sunt mantre politice în România recentă - însă, ca de fiecare dată, soluțiile concrete pentru atingerea acestor obiective de țară lipsesc.</p>
+
+    <p class="fade-in">O simulare a Institutului Național de Statistică arată că, în 2050, populația României va ajunge la <span class="highlight">16 milioane de locuitori</span>. Tot cei de la INS au arătat că în 2025 s-au născut de patru ori mai puțini copii decât acum 100 de ani. O analiză a ONU estimează că, până în anul 2100, populația ar putea scădea chiar până la <span class="highlight">opt milioane de locuitori</span>.</p>
+
+    <p class="fade-in">Încurajarea natalității înseamnă în acest moment aceleași măsuri fără orizont: vouchere, prime, bonusuri. Foarte puțin se vorbește despre trai accesibil, creșterea numărului de creșe și grădinițe publice fiind de pildă o promisiune politică mereu neonorată. Și mai puțin - adică spre deloc - se vorbește despre reintegrarea mamelor la locul de muncă.</p>
+
+    <p class="fade-in">În practică, de cele mai multe ori, mamele se reîntorc din concediul de creștere a copilului în locuri care nu le recunosc noua realitate, în care sunt privite ca niște privilegiate, în care nu primesc condiții de muncă adaptate la situația lor. În schimb, sunt așteptate să livreze la fel ca înainte să devină mame: să stea peste program, să fie disponibile în vacanțe, să nu solicite din senin concedii medicale.</p>
+
+    <p class="fade-in">În ultimă instanță revenirea mamelor la muncă după concediul de creștere a copilului este o chestiune de drepturi. O femeie care naște nu pierde dreptul la muncă. O femeie care naște nu e mai mult mamă și mai puțin profesionistă la locul de muncă doar pentru că așa decide angajatorul. <span class="highlight">Aceste creșteri salariale nu sunt un moft. Sunt un drept.</span></p>
+
+    <img src="gbtw2.jpg" alt="Ilustrație: mamă sărutând copilul" class="flow-illustration fade-in" loading="lazy">
+</section>
+
+    <!-- Section 6: Abuzuri (SCROLL) -->
+    <section id="abuzuri" class="scroll-section">
+        <div class="scroll-graphic">
+            <div id="abuse-graphic">
+                <div id="abuse-quote-display" style="padding:2rem;text-align:center;">
+                    <p id="abuse-quote-text" style="font-family:'Karma',serif;font-size:1.8rem;font-style:italic;color:#b33a3a;line-height:1.4;max-width:400px;margin:0 auto;opacity:0;transition:all 0.5s;"></p>
+                </div>
+                <div id="contestation-stats" style="display:none;text-align:center;padding:2rem;">
+                    <div class="big-stat">43<span class="stat-accent"> contestații</span></div>
+                    <p style="margin:1rem 0;font-family:'Titillium Web',sans-serif;color:#666;">în perioada 2019-2025, depuse de mame revenite din CIC</p>
+                    <div id="contestation-bar" style="max-width:400px;margin:1rem auto;"></div>
+                    <div style="display:flex;justify-content:space-between;max-width:400px;margin:0 auto;">
+                        <span class="stat-positive" style="font-family:'Fira Sans',sans-serif;font-weight:600;">~75% admise</span>
+                        <span style="font-family:'Titillium Web',sans-serif;color:#999;">~25% respinse</span>
+                    </div>
+                    <p style="margin-top:1.5rem;font-family:'Titillium Web',sans-serif;font-size:0.85rem;color:#999;">Durată medie de soluționare: un an și jumătate</p>
+                </div>
+                <div id="abuse-timeline" style="display:none;">
+                    <h4 style="font-family:'Fira Sans',sans-serif;font-weight:600;color:#714b3a;font-size:1.1rem;margin-bottom:1rem;text-align:center;">Cazuri documentate</h4>
+                    <div class="timeline-line">
+                        <div class="timeline-node" data-index="0" style="opacity:0;transform:translateY(20px);">
+                            <div class="timeline-marker"></div>
+                            <div>
+                                <strong>Valeria</strong><span class="timeline-year">apr 2019</span>
+                                <p class="timeline-quote">„Taci din gură că te dau cu capul de toți pereții!"</p>
+                                <p class="timeline-outcome">Croitoreasă · Concediată → Instanța anulat decizia</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node" data-index="1" style="opacity:0;transform:translateY(20px);">
+                            <div class="timeline-marker"></div>
+                            <div>
+                                <strong>Cristina</strong><span class="timeline-year">sep 2019</span>
+                                <p class="timeline-quote">„Ești o nenorocită!"</p>
+                                <p class="timeline-outcome">Femeie de serviciu · Concediată → Repusă pe post</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node" data-index="2" style="opacity:0;transform:translateY(20px);">
+                            <div class="timeline-marker"></div>
+                            <div>
+                                <strong>Manuela</strong><span class="timeline-year">~2020</span>
+                                <p class="timeline-quote">„Te calc în picioare dacă te mai aud cu drepturile tale!"</p>
+                                <p class="timeline-outcome">Asistentă medicală · Concediată → 8 luni de proces</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node" data-index="3" style="opacity:0;transform:translateY(20px);">
+                            <div class="timeline-marker"></div>
+                            <div>
+                                <strong>Simona</strong><span class="timeline-year">~2021</span>
+                                <p class="timeline-quote">„Nu accepți, te trec nemotivată și te concediez!"</p>
+                                <p class="timeline-outcome">Vânzătoare · Post desființat → Reintegrare</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <h3 class="section-heading">Te calc în picioare!</h3>
+                    <p>Când vine vorba de reintegrarea după CIC, experiențele negative la locul de muncă diferă în funcție de mediul profesional. Sunt șanse mai mici ca o mamă angajată într-o corporație să fie hărțuită sau agresată verbal. Șansele sunt mai mari dacă lucrezi ca îngrijitoare, vânzătoare sau muncitoare necalificată.</p>
+                </div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-content light">
+                    <p><strong>Valeria</strong>, croitoreasă necalificată. S-a întors la muncă în aprilie 2019 după doi ani de CIC. Administratorii i-au cerut să renunțe la postul ei pentru cel de femeie de serviciu. A refuzat. Pe 22 aprilie 2019 a fost concediată. Instanța a anulat decizia în iunie 2020.</p>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-content light">
+                    <p><strong>Cristina</strong>, femeie de serviciu la o grădiniță. A revenit în septembrie 2019. Trei luni mai târziu a fost concediată, fiind considerată „inaptă temporar". După aproape doi ani de procese, a obținut repunerea pe post și daune morale de 10.000 de lei.</p>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-content light">
+                    <p><strong>Manuela</strong>, asistentă medicală. Angajatorul a invocat reorganizarea judiciară pentru concedierea ei — cu cinci zile înainte ca ea să revină la muncă. Nu exista nicio dovadă a reorganizării. Opt luni a durat procesul.</p>
+                </div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-content light">
+                    <p><strong>Simona</strong>, vânzătoare. A revenit la muncă cu trei luni înainte de terminarea CIC. Era însărcinată din nou. Angajatorul a decis să-i închidă contractul pe motiv că postul a fost desființat. Instanța a decis reintegrarea.</p>
+                </div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-content light">
+                    <p>Dela0.ro a identificat pe platforma ReJust <span class="highlight">43 de contestații</span> ale deciziilor de concediere între 2019-2025 de către mame revenite din CIC. ~75% au fost admise de instanțe. Doar patru vizează locuri de muncă din categoria gulere albastre.</p>
+                </div>
+            </div>
+            <div class="step" data-step="6">
+                <div class="step-content light">
+                    <blockquote class="pull-quote">Deși un astfel de proces e ușor de câștigat, la nivel național sunt doar 43 de contestații în șapte ani. Partea financiară poate constitui un impediment, mai ales că trebuie estimată din dublă perspectivă: cheltuielile proprii, plus cheltuielile de judecată.<cite>Elenina Nicuț, avocată</cite></blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: ITM Data (SCROLL) -->
+    <section id="itm-data" class="scroll-section">
+        <div class="scroll-graphic">
+            <div id="itm-charts-container">
+                <div id="itm-petitions-chart" style="margin-bottom:1rem;"></div>
+                <div id="itm-controls-chart"></div>
+            </div>
+            <div id="county-tilemap" style="display:none;"></div>
+            <p class="source-label" style="position:absolute;bottom:0.5rem;left:1rem;right:1rem;text-align:center;">Sursa datelor: Inspecția Muncii, răspuns la solicitarea Dela0.ro</p>
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <h3 class="section-heading">Lipsa mecanismului de control</h3>
+                    <p>Între 2019 și 2025, la ITM-urile din țară s-au înregistrat <span class="highlight">648 de petiții</span> care semnalau nereguli privind protecția maternității la locul de muncă. ITM-urile au realizat <span class="highlight">27.490 de controale</span> și au aplicat <span class="highlight">8.053 de măsuri</span>.</p>
+                </div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-content light">
+                    <p>Numărul controalelor a scăzut semnificativ: de la 7.226 în 2019 la 1.668 în 2024. Petițiile, în schimb, au crescut — 133 în 2025, cel mai mare număr din tot intervalul.</p>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-content light">
+                    <p><span class="highlight">45% dintre controale</span> au fost realizate în trei județe — Constanța, Harghita și Hunedoara. Există județe în care controalele sunt inexistente.</p>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-content light">
+                    <p>În Bistrița-Năsăud: <strong>0 controale</strong> în 7 ani. În Olt, Buzău, Călărași, Mehedinți: tot 0. În Timiș: <strong>1 control</strong>. În București: <strong>1 control</strong>.</p>
+                </div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-content light">
+                    <p>ITM-urile <span class="highlight">nu verifică dacă angajatorul are un program de reintegrare profesională</span>. Potrivit Inspecției Muncii, nu există cadru legal care să permită sancționarea angajatorului care nu respectă această prevedere legală, valabilă din 2015.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Ce poți face (SCROLL) -->
+    <section id="ce-poti-face" class="scroll-section">
+    <div class="scroll-graphic">
+        <div id="action-cards-container" style="padding:1.5rem;max-width:450px;">
+            <h3 class="section-heading" style="margin-bottom:1rem;">Ce poți face când îți sunt încălcate drepturile?</h3>
+            <div class="action-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease;margin-bottom:1rem;">
+                <div style="display:flex;align-items:flex-start;gap:1rem;">
+                    <div style="background:#FBBE3B;color:#714b3a;font-family:'Fira Sans',sans-serif;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+                    <div><h4>Petiție la ITM</h4><p>Depune o petiție la Inspectoratul Teritorial de Muncă din județul de domiciliu. Pe site-ul Inspecției Muncii există un formular online care poate fi completat.</p></div>
+                </div>
+            </div>
+            <div class="action-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease;margin-bottom:1rem;">
+                <div style="display:flex;align-items:flex-start;gap:1rem;">
+                    <div style="background:#FBBE3B;color:#714b3a;font-family:'Fira Sans',sans-serif;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+                    <div><h4>Petiție la CNCD</h4><p>Depune o petiție la Consiliul Național pentru Combaterea Discriminării dacă ai fost mutată pe altă poziție, ți-a fost refuzată o mărire sau promovare din cauza maternității.</p></div>
+                </div>
+            </div>
+            <div class="action-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease;margin-bottom:1rem;">
+                <div style="display:flex;align-items:flex-start;gap:1rem;">
+                    <div style="background:#FBBE3B;color:#714b3a;font-family:'Fira Sans',sans-serif;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+                    <div><h4>Contestare în instanță</h4><p>Mergi în instanță pentru a contesta decizia de concediere.</p></div>
+                </div>
+            </div>
+            <div class="action-card" style="opacity:0;transform:translateY(20px);transition:all 0.5s ease;">
+                <div style="display:flex;align-items:flex-start;gap:1rem;">
+                    <div style="background:#FBBE3B;color:#714b3a;font-family:'Fira Sans',sans-serif;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+                    <div><h4>Mediator / consultant</h4><p>Apelează la un mediator care să te ajute să gestionezi relația cu un angajator care vrea să scape de tine după revenirea din concediul de creștere a copilului.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-steps">
+        <div class="step" data-step="0"><div class="step-content light"><p>Există mai multe căi prin care poți reacționa atunci când angajatorul îți încalcă drepturile la revenirea din CIC.</p></div></div>
+        <div class="step" data-step="1"><div class="step-content light"><p>Depune o <span class="highlight">petiție la ITM</span> din județul de domiciliu. Formularul poate fi completat și online.</p></div></div>
+        <div class="step" data-step="2"><div class="step-content light"><p>Sesizează <span class="highlight">CNCD</span> în cazul discriminării legate de maternitate.</p></div></div>
+        <div class="step" data-step="3"><div class="step-content light"><p><span class="highlight">Contestă în instanță</span> decizia de concediere sau apelează la un mediator.</p></div></div>
+    </div>
+</section>
+
+    <!-- Section 9: Povești (FLOW) -->
+    <section id="povesti" class="flow-section">
+    <h2 class="section-heading fade-in">Fiecare se descurcă cum poate</h2>
+
+    <p class="fade-in">Pentru mamele care au locuri de muncă din categoria gulerelor albe cea mai mare problemă la revenirea din CIC este absența procedurilor. Cele mai frecvente nereguli sunt lipsa unui program de reintegrare profesională și refuzul angajatorului de a oferi un program individualizat de lucru.</p>
+
+    <!-- Timea -->
+    <blockquote class="pull-quote fade-in">De data aceasta aș prioritiza sănătatea mintală și aș fi mai prezentă când sunt cu copiii. Dacă mă deconectez între 17.00 și 21.00, atunci între acele ore nu mai există să vorbesc cinci minute la telefon, să trimit repede un mail.<cite>Timea, revenită la muncă în 2024</cite></blockquote>
+
+    <p class="fade-in">A revenit la muncă în 2024, după 11 luni de concediu de creștere a copilului. Nu s-a pus problema unui program de reintegrare profesională, nu s-a pus problema beneficiilor pe care compania le oferă mamelor, nu s-a pus problema informării cu privire la drepturile pe care le are.</p>
+
+    <p class="fade-in">La primul copil, programul ei era: între 9.00 - 10.00 făcea de mâncare, dădea cu aspiratorul; între 10.00 - 17.00 avea program de lucru fără pauze; între 17.00 - 20.00 prelua copilul; după ora 21.00 revenea la job și lucra mult după miezul nopții.</p>
+
+    <blockquote class="pull-quote fade-in">Poate trebuie să cerem noi mai mult - eu ce drepturi am? eu de ce pot beneficia? Oare nu ne putem ajuta punând aceste întrebări?<cite>Timea</cite></blockquote>
+
+    <!-- Bianca -->
+    <p class="fade-in">Bianca a pus întrebări la departamentul de Resurse Umane. A întrebat dacă nu poate să-și ia o zi de lucru acasă pe săptămână. Cei de la resurse umane au spus că verifică și că vor reveni. <span class="highlight">Nu au mai revenit.</span></p>
+
+    <p class="fade-in">Bianca a revenit la muncă la începutul anului 2024, când copilul avea opt luni. Și-ar fi dorit un program flexibil, dar nu a beneficiat de el deși legea îi oferă această posibilitate pe hârtie.</p>
+
+    <blockquote class="pull-quote fade-in">Cred că aș fi renunțat la o parte din salariu, măcar vreo jumătate de an, pentru un program redus ca să nu fie trecerea atât de bruscă.<cite>Bianca</cite></blockquote>
+
+    <img src="gbtw3.jpg" alt="Ilustrație: mamă cu copilul" class="flow-illustration fade-in" loading="lazy">
+
+    <!-- Maria -->
+    <p class="fade-in">Pentru Maria flexibilitatea a însemnat un program cu jumătate de normă, cu sarcini săptămânale de îndeplinit. Lucra între 5.00 - 7.00 dimineața, după amiază și seara. Fiul Mariei avea trei luni când a revenit la muncă.</p>
+
+    <blockquote class="pull-quote fade-in">M-au aruncat direct într-o mare de proiecte și bugete și mi-au spus „Descurcă-te!"<cite>Maria</cite></blockquote>
+
+    <p class="fade-in">„Descurcă-te" a însemnat pentru Maria să ducă mai multe proiecte decât putea pentru a nu fi arătată cu degetul. A însemnat să lucreze multe seri, multe weekenduri, să meargă în deplasări când copiii îi erau bolnavi. A însemnat un ritm care a dus-o în cele din urmă în burnout.</p>
+
+    <!-- Andreea -->
+    <p class="fade-in">Când a decis să revină la muncă, Andreea știa că legea îi dă dreptul la două ore de pauză pentru alăptare. Copilul ei avea cinci luni și jumătate. Angajatorul nu-și dorea însă ca Andreea să revină atât de repede: salariul nu îi mai era mărit și trebuia să vină zilnic la birou, deși lucrase de acasă.</p>
+
+    <blockquote class="pull-quote fade-in">Când am semnat actele pentru reînceperea activității m-am simțit foarte prost, pentru că mi se îngrădeau niște drepturi.<cite>Andreea</cite></blockquote>
+
+    <!-- Ioana -->
+    <p class="fade-in">Există și situații când domeniile profesionale nu permit o absență îndelungată.</p>
+
+    <blockquote class="pull-quote fade-in">Medicina evoluează, iar efortul de a recupera, de a reveni în pâine este uriaș. Am născut la 41 de ani, pot să spun la mijlocul carierei, e mult mai greu să iau o pauză acum.<cite>Ioana Simian, medic dermatolog, revenită la cabinet la 7 luni și jumătate</cite></blockquote>
+
+    <p class="fade-in">Unele dintre mame au revenit mai repede din CIC și pentru a evita o depresie. Au simțit că un loc de muncă le obligă să se mobilizeze, că le ține pe linia de plutire și conectate la o viață pe care credeau că au pierdut-o odată cu venirea copilului.</p>
+
+    <!-- Diana* -->
+    <p class="fade-in">Diana lucrează în domeniul IT. A revenit la muncă în iunie 2024, după un an și zece luni de CIC. Lucrează de acasă, ceea ce-i permite să-și alăpteze copilul la prânz.</p>
+
+    <blockquote class="pull-quote fade-in">E bruscă trecerea asta, nu există o pregătire. Și nu m-am gândit să optez, poate pentru un program de șase ore la început. Am început direct cu opt ore, după aceea mi-a venit ideea.<cite>Diana</cite></blockquote>
+
+    <p class="fade-in">Diana crede că e totuși norocoasă că nu a simțit o presiune din partea angajatorului. A primit task-uri mai ușoare și asta o mulțumește momentan.</p>
+
+    <blockquote class="pull-quote fade-in">Mă simt cumva ca un coleg nou care doar ce a venit în echipă și nu știe cum merg lucrurile.<cite>Diana</cite></blockquote>
+
+    <!-- Lavinia -->
+    <p class="fade-in">Lavinia lucrează în domeniul tehnologiei informației. În iulie 2024 a fost prima zi de muncă. A avut o discuție cu șeful ei care i-a spus că nu e nicio grabă, că o vor lua ușor. A primit un client de care să se ocupe în primele trei-patru luni tocmai pentru a avea o acomodare ușoară.</p>
+
+    <blockquote class="pull-quote fade-in">Când ai flexibilitate, un volum mai mic de muncă, dai un pas înapoi și zici: „Mă lasă să mă duc cu copilul la doctor, mă lasă să nu intru în nu știu câte meeting-uri, eu cum pot să le mai cer bani?"<cite>Lavinia</cite></blockquote>
+
+    <img src="gbtw4.jpg" alt="Ilustrație: mamă cu nou-născut" class="flow-illustration fade-in" loading="lazy">
+
+    <!-- Miruna -->
+    <p class="fade-in">La începutul lui 2024, după aproape doi ani de concediu maternal, Miruna a revenit la muncă. A cerut angajatorului să-i reducă numărul de zile în care trebuia să fie la birou. Angajatorul a anunțat-o că nu-i poate oferi un program individualizat. A fost nevoită să-și caute un alt loc de muncă.</p>
+
+    <blockquote class="pull-quote fade-in">Îmi este incredibil de greu, este incredibil de solicitant. Eu nu ies din casă. Închid munca, trec la făcut cina, culc copiii și apoi muncesc.<cite>Miruna</cite></blockquote>
+
+    <p class="fade-in">Deși s-a întors direct într-o companie nouă, Miruna spune că nu se simte atât de copleșită: <em>după două concedii de maternitate creierul meu simte nevoia să fie folosit și în altă direcție.</em></p>
+
+    <!-- Natalia -->
+    <p class="fade-in">Natalia a revenit la muncă după un CIC în 2018 și un altul în 2022. Nu a avut nicio discuție cu șeful direct sau cu cineva de la resurse umane. A simțit că e datoare să le demonstreze colegilor că ea își poate face treaba, că deși a lipsit doi ani de zile e încă capabilă.</p>
+
+    <p class="fade-in">La șapte luni de la revenire, a rămas pe aceeași poziție pe care o ocupa de cinci ani de zile în timp ce alții avansau. Nu i-a comunicat nimeni motivul. A decis atunci să-și schimbe locul de muncă.</p>
+
+    <!-- Flavia -->
+    <blockquote class="pull-quote fade-in">M-au băgat direct pe programul pe care eram înainte să intru în concediu. Lucram zi - noapte cu o zi liberă. Nu poți așa cu un copil mic.<cite>Flavia, asistentă pe secția de terapie intensivă</cite></blockquote>
+
+    <p class="fade-in">Nu a beneficiat de o mărire salarială, cum au beneficiat alți colegi și nici de un program de reintegrare profesională: <em>Nu a stat nimeni lângă mine măcar o săptămână. Se simte la pus branulă, cateter că nu ai mai făcut asta de doi ani de zile.</em></p>
+
+    <p class="fade-in">Flavia a plecat într-un alt spital din cauza programului. La noul loc de muncă mamele revenite din CIC au un mentor care stă lângă ele timp de două săptămâni.</p>
+
+    <p class="fade-in">În 2021, ministrul Dezvoltării declara că România se află pe ultimul loc între țările UE în ceea ce privește locurile în creșe. Prin PNRR ar fi trebuit să fie gata 124 de creșe în 2025. <span class="highlight">În octombrie 2025 erau finalizate 37.</span></p>
+</section>
+
+    <!-- Section 10: Return Data (SCROLL) -->
+    <section id="return-data" class="scroll-section">
+        <div class="scroll-graphic">
+            <div id="return-chart"></div>
+            <p class="source-label" style="position:absolute;bottom:0.5rem;left:1rem;right:1rem;text-align:center;">Sursa: Agenția Națională de Plăți și Inspecție Socială</p>
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <h3 class="section-heading">După câte luni de CIC revin părinții la muncă</h3>
+                    <p>Aproximativ <span class="highlight">135.000 de părinți</span> revin anual la muncă din concediul de creștere a copilului. Iată cum se distribuie în funcție de momentul revenirii.</p>
+                </div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-content light">
+                    <p>Aproape <span class="highlight">25% revin înainte să împlinească copilul un an</span>. Cele mai multe mame invocă motive financiare: câștigau mai bine decât partenerii.</p>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-content light">
+                    <p>Stimulentul de inserție este oferit părinților care revin la muncă. Dacă revenirea are loc înainte de 6 luni: <strong>1.500 lei</strong>. După 6 luni: <strong>650 lei</strong>.</p>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-content light">
+                    <p>Aproximativ <span class="highlight">15% dintre părinții din CIC sunt bărbați</span>. 85% sunt mame.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 11: Angajatori (FLOW) -->
+    <section id="angajatori" class="flow-section">
+    <h2 class="section-heading fade-in">Angajatorii</h2>
+
+    <p class="fade-in">Pentru a înțelege cum se procedează în România, Dela0.ro a trimis în toamna anului 2024 solicitări de informații către <span class="highlight">18 angajatori publici și privați</span>: Poșta Română, STB, CFR, Armata Română, Kaufland, Dedeman, Lidl, Mega Image, Carrefour, BRD, BCR, ING, ENGIE, Dacia, OMV Petrom, Orange, Ina Schaeffler și ROMGAZ.</p>
+
+    <p class="fade-in">Un prim indicator cu privire la interesul pentru această temă a fost chiar rata de răspuns. Dintre cei 18 angajatori, <span class="highlight">au răspuns doar șapte</span>: Poșta Română, STB, CFR, Armata, Engie, ING și BCR.</p>
+
+    <p class="fade-in">Întrebați despre existența unor politici de reintegrare, marii angajatori publici au trecut în revistă prevederi legislative existente. ING și Engie au indicat că nu au o politică de reintegrare, dar oferă cameră de alăptare, program flexibil și stimulente financiare.</p>
+
+    <p class="fade-in"><span class="highlight">Singurii angajatori care au un program de reintegrare sunt Poșta Română și BCR.</span></p>
+
+    <div class="employer-cards fade-in">
+        <div class="employer-card">
+            <h4>Poșta Română</h4>
+            <ul>
+                <li>Ședințe individuale cu șeful direct și întâlniri cu echipa</li>
+                <li>Program flexibil prin sistem hibrid sau telemuncă</li>
+                <li>Opțiune de revenire treptată prin decalarea programului</li>
+                <li>Consiliere profesională sau sesiuni de coaching</li>
+                <li>Cameră de alăptare la fiecare loc de muncă</li>
+                <li>Posibilitatea de a aduce copilul la muncă în situații de urgență</li>
+            </ul>
+        </div>
+        <div class="employer-card">
+            <h4>BCR</h4>
+            <ul>
+                <li>Plan personalizat de reintegrare cu sesiuni de orientare și training</li>
+                <li>Ghiduri pentru manager și pentru părintele care revine</li>
+                <li>Program „Mindful Parent" pentru incluziune și sănătate emoțională</li>
+                <li>Program flexibil: început între 8:00-10:00</li>
+                <li>7 zile extra de concediu plătit</li>
+                <li>Concediu sabatic cu plata salariului în proporție de 50%</li>
+                <li>Testarea săptămânii de lucru de 4 zile</li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="fade-in">Un program de reintegrare nu înseamnă o înșiruire de drepturi prevăzute de lege. Presupune gândirea unor pași clari care să-i facă mamei acomodarea ușoară. Înseamnă, în final, recunoașterea noii realități pe care mama o trăiește și adaptarea colectivului la această nouă realitate.</p>
+
+    <blockquote class="pull-quote fade-in">Există un fel de ipocrizie în cultura companiilor. Din documentele de misiune și viziune și afișele de pe pereți pare că există sprijin pentru mamele revenite la muncă. În realitate însă vorbim de o atitudine toxică, nimeni nu are timp de ele, mulți le invidiază că au stat acasă.<cite>Ana Măiță, președinta asociației Mame pentru Mame</cite></blockquote>
+</section>
+
+    <!-- Section 12: Europa (SCROLL) -->
+    <section id="europa" class="scroll-section">
+        <div class="scroll-graphic">
+            <div id="europe-map" style="width:100%;margin:0 auto;"></div>
+            <div id="country-info" style="display:none;">
+                <h4 id="country-name"></h4>
+                <p id="country-policy"></p>
+            </div>
+            <div id="europe-tabs" style="display:none;">
+                <div class="tab-bar" id="europe-tab-bar">
+                    <div class="tab-item active" data-country="826">🇬🇧 UK</div>
+                    <div class="tab-item" data-country="276">🇩🇪 DE</div>
+                    <div class="tab-item" data-country="250">🇫🇷 FR</div>
+                    <div class="tab-item" data-country="40">🇦🇹 AT</div>
+                    <div class="tab-item" data-country="578">🇳🇴 NO</div>
+                </div>
+                <div class="tab-content" id="europe-tab-content"></div>
+            </div>
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <h3 class="section-heading">Ce fac alții?</h3>
+                    <p>Există modalități prin care alte țări mențin legătura între angajator și părintele aflat în concediu de creștere a copilului și facilitează revenirea la muncă.</p>
+                </div>
+            </div>
+            <div class="step" data-step="1"><div class="step-content light"><p>🇬🇧 <strong>Marea Britanie</strong>: Nu poți fi concediată pentru că ai cerut program flexibil. Programul flexibil include și ceea ce se numește job sharing — o poziție cu normă întreagă împărțită între doi angajați cu normă parțială. Pe perioada CIC, salariatul are posibilitatea de a avea până la 10 zile de menținere a contactului cu angajatorul.</p></div></div>
+            <div class="step" data-step="2"><div class="step-content light"><p>🇩🇪 <strong>Germania</strong>: Angajatorul este obligat să ofere un interviu înainte de revenirea părintelui la muncă. Interviul e menit să ajute angajatorul să dezvolte un program individualizat și adaptat la nevoile fiecărui părinte.</p></div></div>
+            <div class="step" data-step="3"><div class="step-content light"><p>🇫🇷 <strong>Franța</strong>: Părinții reveniți la muncă după concediul de maternitate au dreptul la o întâlnire cu angajatorul pentru a discuta despre viitorul lor profesional.</p></div></div>
+            <div class="step" data-step="4"><div class="step-content light"><p>🇦🇹 <strong>Austria</strong>: Părinții au dreptul să lucreze cu jumătate de normă până când copilul împlinește 7 ani, dacă compania are peste 20 de angajați și părintele lucrează acolo de cel puțin 3 ani. În primii 4 ani nu pot fi concediați sub nicio formă.</p></div></div>
+            <div class="step" data-step="5"><div class="step-content light"><p>🇳🇴 <strong>Norvegia</strong>: Pe perioada concediului parental plătit, părintele poate lucra alegând concediu parțial. De exemplu, poate lucra 40% din program, iar pentru restul de 60% primește beneficiile alocate concediului parental.</p></div></div>
+        </div>
+    </section>
+
+    <!-- Section 13: Noroc (FLOW) -->
+    <section id="noroc" class="flow-section">
+    <h2 class="section-heading fade-in">O chestiune de noroc</h2>
+
+    <p class="fade-in">Din cele 18 mame consultate în cadrul documentării, șase spun că au avut parte de o reintegrare pozitivă. Experiențele țin de noroc, norocul de a avea un angajator dispus să respecte legea și/sau un colectiv profesional care înțelege noua realitate a femeii care revine la muncă.</p>
+
+    <p class="fade-in">Emilia, care a stat în CIC doi ani, a avut parte de o revenire treptată. A trecut printr-o serie de traininguri. În primele două-trei luni i-au dat timp să citească, să se (re)acomodeze. I-a luat un an să găsească un echilibru între performanță la muncă și timp cu copilul.</p>
+
+    <p class="fade-in">Contează și poziția pe care mama o ocupă. Cu cât ea este mai înaltă cu atât puterea de a-și negocia programul crește. Irina Nicoleta Scarlat a fost promovată fix în ziua în care a născut. Spune că a simțit că a ajuns la nivelul la care era înainte de copil abia după ce copilul a împlinit patru ani.</p>
+
+    <img src="gbtw4.jpg" alt="Ilustrație: mamă îmbrățișând copilul" class="flow-illustration fade-in" loading="lazy">
+
+    <h2 class="section-heading fade-in">Colega care ne enervează</h2>
+
+    <p class="fade-in">Gabriela a experimentat două reveniri din CIC la același loc de muncă.</p>
+
+    <p class="fade-in">Când s-a întors prima oară, în 2011, simțea că, în cei doi ani de concediu, se detașase complet. Colegii au privit-o ca pe o privilegiată, o persoană care a stat acasă în vreme ce ei au preluat sarcini suplimentare.</p>
+
+    <blockquote class="pull-quote fade-in">Cel mai greu a fost cu reintegrarea în colectiv și găsirea unui rost acolo, că părea că nu a mai rămas nimic de făcut pentru mine în afară de munci din alea de le dai unor începători.<cite>Gabriela</cite></blockquote>
+
+    <p class="fade-in">A fost o retrogradare nedeclarată oficial. Nu a existat nicio discuție cu vreun superior pentru că era de la sine înțeles că lucrurile trebuie să se întâmple așa.</p>
+
+    <blockquote class="pull-quote fade-in">Eram cam fără rost. Egoul îmi era clar rănit. Deci asta mi-a fost cel mai greu și nici n-am știut, n-am putut să fiu fermă și să cer.<cite>Gabriela</cite></blockquote>
+
+    <p class="fade-in">A revenit după încă un an de CIC, în 2013. Au urmat ani în care s-a simțit marginalizată. În 2020 s-a mutat, forțat, într-un alt departament.</p>
+
+    <blockquote class="pull-quote fade-in">Eu nici nu mai cred în mine, nu m-am mai dezvoltat deloc, nu știu dacă mai vreau în domeniul acesta. Sunt un om care la 45 de ani arată că nu a evoluat deloc.<cite>Gabriela</cite></blockquote>
+
+    <p class="fade-in">Între experiența Gabrielei și a celor mai multe mame care au discutat cu Dela0.ro este o diferență de opt, chiar zece ani. Cu toate că în acest interval au existat unele îmbunătățiri legislative, în practică pentru mamele revenite din CIC nu s-a schimbat nimic.</p>
+</section>
+
+    <!-- Section 14: Call to action (SCROLL) -->
+    <section id="call-to-action" class="scroll-section">
+        <div class="scroll-graphic">
+            <img src="gbtw1.jpg" alt="Ilustrație: mamă ținând în brațe un nou-născut" style="max-width:80%;max-height:80vh;object-fit:contain;">
+        </div>
+        <div class="scroll-steps">
+            <div class="step" data-step="0">
+                <div class="step-content light">
+                    <h3 class="section-heading">Ajută-ne să facem o hartă a abuzurilor!</h3>
+                    <p>22 de experiențe au stat la baza documentării acestui articol. Cele mai multe au fost spuse direct de mame. Doar cinci vizează meserii din zona gulerelor albastre.</p>
+                </div>
+            </div>
+            <div class="step" data-step="1">
+                <div class="step-content light">
+                    <p>Reintegrarea mamelor la locul de muncă este un subiect tabu. Mamele sunt concentrate să-și păstreze locul de muncă în orice condiții, preocupate să demonstreze că încă își pot face treaba.</p>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-content light">
+                    <p>În România, mamele cu venituri medii spre mari vorbesc puțin despre experiența reintegrării, în vreme ce mamele cu venituri moderate și mici nu vorbesc deloc.</p>
+                    <p>De aceea ne-am propus un apel la destăinuire. Mărturii sistematizate ne-ar permite să realizăm <span class="highlight">o hartă a dificultăților și abuzurilor</span>.</p>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-content light">
+                    <p style="font-family:'Fira Sans',sans-serif;font-size:1.3rem;font-weight:600;color:#714b3a;margin-bottom:1.5rem;">Astăzi nu există țară pentru mamele care se întorc la serviciu. Poate mâine va exista.</p>
+                    <a href="https://forms.gle/2igwnejnBRuVKaaz6" target="_blank" rel="noopener" class="cta-button">Completează chestionarul</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="article-footer">
+        <p><strong>Diana Oncioiu</strong> · <a href="https://beta.dela0.ro" target="_blank" rel="noopener">Dela0.ro</a></p>
+        <p>Editor: Vlad Stoicescu</p>
+        <p class="source-label">© 2025 Dela0.ro</p>
+    </footer>
+
+    <script>
+        // ===== SCROLLAMA INITIALIZATION =====
+        const scrollSections = document.querySelectorAll('.scroll-section');
+        const scrollers = [];
+
+        scrollSections.forEach(section => {
+            const scroller = scrollama();
+            scroller.setup({
+                step: section.querySelectorAll('.step'),
+                offset: 0.5,
+                progress: true
+            })
+            .onStepEnter(handleStepEnter)
+            .onStepProgress(handleStepProgress);
+            scrollers.push(scroller);
+        });
+
+        // ===== STEP HANDLERS =====
+        function handleStepEnter(response) {
+            const section = response.element.closest('.scroll-section');
+            section.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            response.element.classList.add('active');
+
+            const sectionId = section.id;
+            const stepIndex = parseInt(response.element.dataset.step);
+            updateGraphic(sectionId, stepIndex);
+        }
+
+        function handleStepProgress(response) {
+            // For animation progress within a step (0 to 1)
+        }
+
+        // ===== CHART REGISTRY AND GRAPHIC DISPATCHER =====
+        const charts = {};
+        let scrollActiveCountryId = null;
+
+        function renderDonutChart() {
+            const data = [
+                { label: 'Experiență negativă', value: 69, color: '#b33a3a' },
+                { label: 'Experiență pozitivă', value: 31, color: '#4a7a44' }
+            ];
+
+            const width = 300, height = 300;
+            const radius = Math.min(width, height) / 2;
+            const innerRadius = radius * 0.6;
+            const outerRadius = radius * 0.85;
+
+            const svg = d3.select('#donut-chart')
+                .append('svg')
+                .attr('viewBox', `0 0 ${width} ${height}`)
+                .attr('role', 'img')
+                .attr('aria-label', '69% dintre mame au avut o experiență negativă de reintegrare')
+                .append('g')
+                .attr('transform', `translate(${width/2},${height/2})`);
+
+            const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+            const pie = d3.pie().value(d => d.value).sort(null);
+
+            const zeroArc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius)
+                .startAngle(0).endAngle(0);
+
+            const arcs = svg.selectAll('.arc')
+                .data(pie(data))
+                .enter().append('path')
+                .attr('class', 'arc')
+                .attr('fill', d => d.data.color)
+                .attr('d', zeroArc);
+
+            // Center text
+            svg.append('text')
+                .attr('text-anchor', 'middle')
+                .attr('dy', '-0.1em')
+                .style('font-family', "'Fira Sans', sans-serif")
+                .style('font-size', '3rem')
+                .style('font-weight', '700')
+                .style('fill', '#714b3a')
+                .text('69%');
+
+            svg.append('text')
+                .attr('text-anchor', 'middle')
+                .attr('dy', '1.8em')
+                .style('font-family', "'Titillium Web', sans-serif")
+                .style('font-size', '0.75rem')
+                .style('fill', '#777')
+                .text('experiență negativă');
+
+            charts.donut = { arcs, arc };
+        }
+
+        function animateDonut() {
+            if (!charts.donut) return;
+            charts.donut.arcs.transition().duration(1200)
+                .attrTween('d', function(d) {
+                    const interpolate = d3.interpolate({ startAngle: d.startAngle, endAngle: d.startAngle }, d);
+                    return function(t) { return charts.donut.arc(interpolate(t)); };
+                });
+        }
+
+        function renderContestationBar() {
+            const svg = d3.select('#contestation-bar').append('svg')
+                .attr('viewBox', '0 0 400 36')
+                .attr('role', 'img')
+                .attr('aria-label', 'Aproximativ 75% din contestații au fost admise');
+
+            svg.append('rect').attr('x', 0).attr('y', 0).attr('width', 0)
+                .attr('height', 36).attr('fill', '#4a7a44').attr('rx', 4)
+                .transition().duration(800).attr('width', 300);
+
+            svg.append('rect').attr('x', 300).attr('y', 0).attr('width', 0)
+                .attr('height', 36).attr('fill', '#e0d5c8').attr('rx', 4)
+                .transition().duration(800).delay(200).attr('width', 100);
+
+            svg.append('text').attr('x', 150).attr('y', 22)
+                .attr('text-anchor', 'middle')
+                .style('fill', 'white').style('font-family', "'Fira Sans', sans-serif")
+                .style('font-size', '13px').style('font-weight', '600')
+                .text('admise');
+
+            svg.append('text').attr('x', 350).attr('y', 22)
+                .attr('text-anchor', 'middle')
+                .style('fill', '#999').style('font-family', "'Fira Sans', sans-serif")
+                .style('font-size', '13px')
+                .text('respinse');
+        }
+
+        // ===== ITM DATA =====
+        const itmData = [
+            { year: 2019, petitions: 88, controls: 7226, measures: 1817 },
+            { year: 2020, petitions: 80, controls: 4561, measures: 1308 },
+            { year: 2021, petitions: 77, controls: 4049, measures: 1203 },
+            { year: 2022, petitions: 98, controls: 3474, measures: 1057 },
+            { year: 2023, petitions: 91, controls: 3801, measures: 1800 },
+            { year: 2024, petitions: 81, controls: 1668, measures: 407 },
+            { year: 2025, petitions: 133, controls: 2711, measures: 461 }
+        ];
+
+        function renderItmCharts() {
+            renderSimpleBarChart('#itm-petitions-chart', itmData, 'petitions',
+                'Petiții transmise către ITM-uri', '#FBBE3B', 220);
+            renderGroupedBarChart('#itm-controls-chart', itmData, 280);
+            charts.itm = true;
+        }
+
+        function renderSimpleBarChart(selector, data, key, title, color, chartHeight) {
+            const margin = { top: 25, right: 15, bottom: 30, left: 40 };
+            const width = 450 - margin.left - margin.right;
+            const height = chartHeight - margin.top - margin.bottom;
+
+            const svg = d3.select(selector).append('svg')
+                .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+                .attr('role', 'img')
+                .attr('aria-label', title)
+                .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            svg.append('text').attr('x', 0).attr('y', -10)
+                .style('font-family', "'Fira Sans', sans-serif").style('font-size', '13px')
+                .style('font-weight', '600').style('fill', '#714b3a')
+                .text(title);
+
+            const x = d3.scaleBand().domain(data.map(d => d.year)).range([0, width]).padding(0.3);
+            const y = d3.scaleLinear().domain([0, d3.max(data, d => d[key]) * 1.1]).range([height, 0]);
+
+            svg.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).tickFormat(d3.format('d')))
+                .selectAll('text').style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px');
+
+            svg.append('g').call(d3.axisLeft(y).ticks(4))
+                .selectAll('text').style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px');
+
+            svg.selectAll('.bar').data(data).enter().append('rect')
+                .attr('x', d => x(d.year)).attr('width', x.bandwidth())
+                .attr('y', height).attr('height', 0)
+                .attr('fill', color).attr('rx', 2)
+                .transition().duration(800)
+                .attr('y', d => y(d[key]))
+                .attr('height', d => height - y(d[key]));
+
+            svg.selectAll('.label').data(data).enter().append('text')
+                .attr('x', d => x(d.year) + x.bandwidth() / 2)
+                .attr('y', d => y(d[key]) - 4)
+                .attr('text-anchor', 'middle')
+                .style('font-family', "'Titillium Web', sans-serif").style('font-size', '10px')
+                .style('fill', '#714b3a').style('opacity', 0)
+                .text(d => d[key])
+                .transition().delay(800).duration(300).style('opacity', 1);
+        }
+
+        function renderGroupedBarChart(selector, data, chartHeight) {
+            const margin = { top: 25, right: 15, bottom: 30, left: 55 };
+            const width = 450 - margin.left - margin.right;
+            const height = chartHeight - margin.top - margin.bottom;
+
+            const svg = d3.select(selector).append('svg')
+                .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+                .attr('role', 'img')
+                .attr('aria-label', 'Controale efectuate și măsuri dispuse de ITM-uri între 2019-2025')
+                .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            svg.append('text').attr('x', 0).attr('y', -10)
+                .style('font-family', "'Fira Sans', sans-serif").style('font-size', '13px')
+                .style('font-weight', '600').style('fill', '#714b3a')
+                .text('Controale și măsuri');
+
+            const keys = ['controls', 'measures'];
+            const labels = ['Controale', 'Măsuri'];
+            const colors = ['#714b3a', '#c4a882'];
+
+            const x0 = d3.scaleBand().domain(data.map(d => d.year)).range([0, width]).padding(0.2);
+            const x1 = d3.scaleBand().domain(keys).range([0, x0.bandwidth()]).padding(0.05);
+            const y = d3.scaleLinear().domain([0, d3.max(data, d => Math.max(d.controls, d.measures)) * 1.1]).range([height, 0]);
+
+            svg.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x0).tickFormat(d3.format('d')))
+                .selectAll('text').style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px');
+
+            svg.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('~s')))
+                .selectAll('text').style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px');
+
+            const groups = svg.selectAll('.group').data(data).enter().append('g')
+                .attr('transform', d => `translate(${x0(d.year)},0)`);
+
+            keys.forEach((key, i) => {
+                groups.append('rect')
+                    .attr('x', x1(key)).attr('width', x1.bandwidth())
+                    .attr('y', height).attr('height', 0)
+                    .attr('fill', colors[i]).attr('rx', 2)
+                    .transition().duration(800)
+                    .attr('y', d => y(d[key]))
+                    .attr('height', d => height - y(d[key]));
+            });
+
+            const legend = svg.append('g').attr('transform', `translate(${width - 200}, -10)`);
+            labels.forEach((label, i) => {
+                const g = legend.append('g').attr('transform', `translate(${i * 110}, 0)`);
+                g.append('rect').attr('width', 10).attr('height', 10).attr('fill', colors[i]).attr('rx', 2);
+                g.append('text').attr('x', 14).attr('y', 9)
+                    .style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px')
+                    .style('fill', '#666').text(label);
+            });
+        }
+
+        // ===== COUNTY TILEMAP DATA =====
+        const countyData = {
+            'SM': { name: 'Satu Mare', controls: 147 },
+            'MM': { name: 'Maramureș', controls: 0 },
+            'BT': { name: 'Botoșani', controls: 2 },
+            'SV': { name: 'Suceava', controls: 46 },
+            'IS': { name: 'Iași', controls: 165 },
+            'SJ': { name: 'Sălaj', controls: 0 },
+            'BN': { name: 'Bistrița-N.', controls: 0 },
+            'NT': { name: 'Neamț', controls: 0 },
+            'BH': { name: 'Bihor', controls: 3 },
+            'CJ': { name: 'Cluj', controls: 3 },
+            'MS': { name: 'Mureș', controls: 77 },
+            'HR': { name: 'Harghita', controls: 249 },
+            'BC': { name: 'Bacău', controls: 0 },
+            'VS': { name: 'Vaslui', controls: 1 },
+            'AR': { name: 'Arad', controls: 54 },
+            'HD': { name: 'Hunedoara', controls: 168 },
+            'AB': { name: 'Alba', controls: 2 },
+            'SB': { name: 'Sibiu', controls: 51 },
+            'BV': { name: 'Brașov', controls: 7 },
+            'CV': { name: 'Covasna', controls: 0 },
+            'VN': { name: 'Vrancea', controls: 2 },
+            'TM': { name: 'Timiș', controls: 1 },
+            'CS': { name: 'Caraș-S.', controls: 485 },
+            'GJ': { name: 'Gorj', controls: 13 },
+            'VL': { name: 'Vâlcea', controls: 0 },
+            'AG': { name: 'Argeș', controls: 10 },
+            'DB': { name: 'Dâmbovița', controls: 299 },
+            'PH': { name: 'Prahova', controls: 0 },
+            'BZ': { name: 'Buzău', controls: 0 },
+            'GL': { name: 'Galați', controls: 0 },
+            'MH': { name: 'Mehedinți', controls: 0 },
+            'DJ': { name: 'Dolj', controls: 1 },
+            'OT': { name: 'Olt', controls: 0 },
+            'TR': { name: 'Teleorman', controls: 90 },
+            'GR': { name: 'Giurgiu', controls: 2 },
+            'B':  { name: 'București', controls: 1 },
+            'IF': { name: 'Ilfov', controls: 175 },
+            'IL': { name: 'Ialomița', controls: 0 },
+            'CL': { name: 'Călărași', controls: 0 },
+            'CT': { name: 'Constanța', controls: 1407 },
+            'TL': { name: 'Tulcea', controls: 1 },
+            'BR': { name: 'Brăila', controls: 339 },
+        };
+
+        const tileLayout = [
+            { id: 'SM', row: 0, col: 1 }, { id: 'MM', row: 0, col: 2 }, { id: 'BT', row: 0, col: 4 },
+            { id: 'SJ', row: 1, col: 1 }, { id: 'BN', row: 1, col: 2 }, { id: 'SV', row: 0, col: 5 },
+            { id: 'BH', row: 1, col: 0 }, { id: 'CJ', row: 1, col: 2 }, { id: 'MS', row: 1, col: 3 },
+            { id: 'NT', row: 1, col: 5 }, { id: 'IS', row: 1, col: 6 },
+            { id: 'AR', row: 2, col: 0 }, { id: 'HD', row: 2, col: 1 }, { id: 'AB', row: 2, col: 2 },
+            { id: 'SB', row: 2, col: 3 }, { id: 'HR', row: 1, col: 4 },
+            { id: 'BV', row: 2, col: 4 }, { id: 'CV', row: 2, col: 5 },
+            { id: 'BC', row: 1, col: 5 }, { id: 'VS', row: 1, col: 7 },
+            { id: 'TM', row: 3, col: 0 }, { id: 'CS', row: 3, col: 1 },
+            { id: 'GJ', row: 3, col: 2 }, { id: 'VL', row: 3, col: 3 },
+            { id: 'AG', row: 3, col: 4 }, { id: 'DB', row: 3, col: 5 },
+            { id: 'PH', row: 3, col: 6 }, { id: 'BZ', row: 3, col: 7 },
+            { id: 'VN', row: 2, col: 6 }, { id: 'GL', row: 2, col: 7 },
+            { id: 'MH', row: 4, col: 1 }, { id: 'DJ', row: 4, col: 2 },
+            { id: 'OT', row: 4, col: 3 }, { id: 'TR', row: 4, col: 4 },
+            { id: 'GR', row: 4, col: 5 }, { id: 'B', row: 4, col: 6 },
+            { id: 'IF', row: 4, col: 7 },
+            { id: 'IL', row: 5, col: 6 }, { id: 'CL', row: 5, col: 5 },
+            { id: 'CT', row: 5, col: 7 }, { id: 'TL', row: 5, col: 8 },
+            { id: 'BR', row: 5, col: 7 }
+        ];
+
+        function renderTilemap() {
+            const tileSize = 52;
+            const gap = 3;
+            const cols = 9;
+            const rows = 6;
+            const width = cols * (tileSize + gap);
+            const height = rows * (tileSize + gap);
+
+            const maxControls = d3.max(Object.values(countyData), d => d.controls);
+            const colorScale = d3.scaleSequential()
+                .domain([0, Math.sqrt(maxControls)])
+                .interpolator(d3.interpolateRgb('#f5f0e8', '#FBBE3B'));
+
+            const svg = d3.select('#county-tilemap').append('svg')
+                .attr('viewBox', `0 0 ${width} ${height + 30}`)
+                .attr('role', 'img')
+                .attr('aria-label', 'Harta controalelor ITM pe județe');
+
+            svg.append('text').attr('x', width / 2).attr('y', 15)
+                .attr('text-anchor', 'middle')
+                .style('font-family', "'Fira Sans', sans-serif").style('font-size', '13px')
+                .style('font-weight', '600').style('fill', '#714b3a')
+                .text('Controale pe județe (total 2019-2025)');
+
+            const g = svg.append('g').attr('transform', 'translate(0, 25)');
+
+            const tooltip = d3.select('#county-tilemap').append('div')
+                .style('position', 'absolute').style('background', 'white')
+                .style('border', '1px solid #ddd').style('border-radius', '6px')
+                .style('padding', '8px 12px').style('font-family', "'Titillium Web', sans-serif")
+                .style('font-size', '12px').style('pointer-events', 'none')
+                .style('opacity', 0).style('z-index', 10)
+                .style('box-shadow', '0 2px 8px rgba(0,0,0,0.1)');
+
+            tileLayout.forEach(tile => {
+                const data = countyData[tile.id];
+                if (!data) return;
+
+                const x = tile.col * (tileSize + gap);
+                const y = tile.row * (tileSize + gap);
+
+                const tileG = g.append('g').attr('transform', `translate(${x}, ${y})`);
+
+                tileG.append('rect')
+                    .attr('width', tileSize).attr('height', tileSize)
+                    .attr('fill', colorScale(Math.sqrt(data.controls)))
+                    .attr('stroke', '#fff').attr('stroke-width', 1.5)
+                    .attr('rx', 4);
+
+                tileG.append('text')
+                    .attr('x', tileSize / 2).attr('y', tileSize / 2 - 4)
+                    .attr('text-anchor', 'middle')
+                    .style('font-family', "'Fira Sans', sans-serif").style('font-size', '10px')
+                    .style('font-weight', '600').style('fill', data.controls > 200 ? '#fff' : '#714b3a')
+                    .text(tile.id);
+
+                tileG.append('text')
+                    .attr('x', tileSize / 2).attr('y', tileSize / 2 + 10)
+                    .attr('text-anchor', 'middle')
+                    .style('font-family', "'Titillium Web', sans-serif").style('font-size', '9px')
+                    .style('fill', data.controls > 200 ? 'rgba(255,255,255,0.8)' : '#999')
+                    .text(data.controls > 0 ? data.controls.toLocaleString('ro-RO') : '0');
+
+                tileG.on('mouseenter', function(event) {
+                    tooltip.style('opacity', 1)
+                        .html(`<strong>${data.name}</strong><br>Controale: ${data.controls.toLocaleString('ro-RO')}`);
+                })
+                .on('mousemove', function(event) {
+                    const rect = document.getElementById('county-tilemap').getBoundingClientRect();
+                    tooltip.style('left', (event.clientX - rect.left + 10) + 'px')
+                        .style('top', (event.clientY - rect.top - 30) + 'px');
+                })
+                .on('mouseleave', function() {
+                    tooltip.style('opacity', 0);
+                });
+            });
+
+            charts.tilemap = true;
+        }
+
+        const returnData = [
+            { year: 2019, before6mo: 29398, mo6to1yr: 7862, after1yr: 117066 },
+            { year: 2020, before6mo: 25761, mo6to1yr: 6148, after1yr: 115688 },
+            { year: 2021, before6mo: 25277, mo6to1yr: 5034, after1yr: 113892 },
+            { year: 2022, before6mo: 27231, mo6to1yr: 4150, after1yr: 120389 },
+            { year: 2023, before6mo: 28782, mo6to1yr: 3702, after1yr: 117285 },
+            { year: 2024, before6mo: 29449, mo6to1yr: 3141, after1yr: 108641 },
+            { year: 2025, before6mo: 27236, mo6to1yr: 2940, after1yr: 105039 }
+        ];
+
+        function renderReturnChart() {
+            const keys = ['before6mo', 'mo6to1yr', 'after1yr'];
+            const labels = ['Înainte de 6 luni', '6 luni - 1 an', 'După 1 an'];
+            const colors = ['#fcd882', '#FBBE3B', '#a87b1a'];
+
+            const margin = { top: 35, right: 20, bottom: 35, left: 55 };
+            const width = 480 - margin.left - margin.right;
+            const height = 380 - margin.top - margin.bottom;
+
+            const svg = d3.select('#return-chart').append('svg')
+                .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+                .attr('role', 'img')
+                .attr('aria-label', 'Numărul beneficiarilor de stimulent de inserție pe categorii de vârstă a copilului')
+                .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            // Title
+            svg.append('text').attr('x', 0).attr('y', -18)
+                .style('font-family', "'Fira Sans', sans-serif").style('font-size', '13px')
+                .style('font-weight', '600').style('fill', '#714b3a')
+                .text('Beneficiari stimulent de inserție');
+
+            const stack = d3.stack().keys(keys);
+            const series = stack(returnData);
+
+            const x = d3.scaleBand().domain(returnData.map(d => d.year)).range([0, width]).padding(0.3);
+            const y = d3.scaleLinear().domain([0, d3.max(series[series.length - 1], d => d[1]) * 1.05]).range([height, 0]);
+
+            svg.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).tickFormat(d3.format('d')))
+                .selectAll('text').style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px');
+
+            svg.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('~s')))
+                .selectAll('text').style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px');
+
+            const groups = svg.selectAll('.serie').data(series).enter().append('g')
+                .attr('fill', (d, i) => colors[i]);
+
+            groups.selectAll('rect').data(d => d).enter().append('rect')
+                .attr('x', d => x(d.data.year)).attr('width', x.bandwidth())
+                .attr('y', height).attr('height', 0).attr('rx', 2);
+
+            charts.returnToWork = { groups, y, height };
+
+            // Legend
+            const legend = svg.append('g').attr('transform', `translate(0, -6)`);
+            labels.forEach((label, i) => {
+                const g = legend.append('g').attr('transform', `translate(${i * 140}, 0)`);
+                g.append('rect').attr('width', 10).attr('height', 10).attr('fill', colors[i]).attr('rx', 2);
+                g.append('text').attr('x', 14).attr('y', 9)
+                    .style('font-family', "'Titillium Web', sans-serif").style('font-size', '10px')
+                    .style('fill', '#666').text(label);
+            });
+        }
+
+        function animateReturnChart() {
+            if (!charts.returnToWork) return;
+            const { groups, y, height } = charts.returnToWork;
+            groups.selectAll('rect').transition().duration(800)
+                .attr('y', d => y(d[1]))
+                .attr('height', d => y(d[0]) - y(d[1]));
+        }
+
+        const countryPolicies = {
+            '826': { name: 'Marea Britanie', text: 'Nu poți fi concediată pentru că ai cerut program flexibil. Programul flexibil include și ceea ce se numește job sharing — o poziție cu normă întreagă împărțită între doi angajați cu normă parțială. Pe perioada CIC, salariatul are posibilitatea de a avea până la 10 zile de menținere a contactului cu angajatorul.' },
+            '276': { name: 'Germania', text: 'Angajatorul este obligat să ofere un interviu înainte de revenirea părintelui la muncă. Interviul e menit să ajute angajatorul să dezvolte un program individualizat și adaptat la nevoile fiecărui părinte.' },
+            '250': { name: 'Franța', text: 'Părinții reveniți la muncă după concediul de maternitate au dreptul la o întâlnire cu angajatorul pentru a discuta despre viitorul lor profesional.' },
+            '40':  { name: 'Austria', text: 'Părinții au dreptul să lucreze cu jumătate de normă până când copilul împlinește 7 ani, dacă compania are peste 20 de angajați și părintele lucrează acolo de cel puțin 3 ani. În primii 4 ani nu pot fi concediați sub nicio formă.' },
+            '578': { name: 'Norvegia', text: 'Pe perioada concediului parental plătit, părintele poate lucra alegând concediu parțial. De exemplu, poate lucra 40% din program, iar pentru restul de 60% primește beneficiile alocate concediului parental.' }
+        };
+
+        const highlightCountryIds = new Set(['826', '276', '250', '40', '578']);
+
+        function renderEuropeMap() {
+            const width = 500, height = 400;
+
+            const svg = d3.select('#europe-map').append('svg')
+                .attr('viewBox', `0 0 ${width} ${height}`)
+                .attr('role', 'img')
+                .attr('aria-label', 'Harta Europei cu politici de reintegrare parentală');
+
+            const projection = d3.geoMercator()
+                .center([15, 54])
+                .scale(500)
+                .translate([width / 2, height / 2]);
+
+            const path = d3.geoPath().projection(projection);
+
+            d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+                .then(world => {
+                    const countries = topojson.feature(world, world.objects.countries);
+
+                    // Verify IDs
+                    const availableIds = new Set(countries.features.map(f => f.id));
+                    highlightCountryIds.forEach(id => {
+                        if (!availableIds.has(id)) console.warn(`Country ID ${id} not found in TopoJSON`);
+                    });
+
+                    svg.selectAll('path')
+                        .data(countries.features.filter(f => {
+                            const c = projection(d3.geoCentroid(f));
+                            return c && c[0] > -50 && c[0] < width + 50 && c[1] > -50 && c[1] < height + 50;
+                        }))
+                        .enter().append('path')
+                        .attr('d', path)
+                        .attr('fill', d => highlightCountryIds.has(d.id) ? '#FBBE3B' : '#e8e0d4')
+                        .attr('stroke', '#fff')
+                        .attr('stroke-width', 0.5)
+                        .attr('tabindex', d => highlightCountryIds.has(d.id) ? '0' : null)
+                        .attr('role', d => highlightCountryIds.has(d.id) ? 'button' : null)
+                        .attr('aria-label', d => {
+                            const p = countryPolicies[d.id];
+                            return p ? `${p.name} — click pentru detalii` : null;
+                        })
+                        .style('cursor', d => highlightCountryIds.has(d.id) ? 'pointer' : 'default')
+                        .on('click', function(event, d) {
+                            if (highlightCountryIds.has(d.id)) showCountryInfo(d.id);
+                        })
+                        .on('mouseenter', function(event, d) {
+                            if (highlightCountryIds.has(d.id)) {
+                                d3.select(this).attr('fill', '#e5a52e');
+                            }
+                        })
+                        .on('mouseleave', function(event, d) {
+                            if (highlightCountryIds.has(d.id)) {
+                                d3.select(this).attr('fill', d.id === scrollActiveCountryId ? '#714b3a' : '#FBBE3B');
+                            }
+                        })
+                        .on('keydown', function(event, d) {
+                            if (event.key === 'Enter' && highlightCountryIds.has(d.id)) {
+                                showCountryInfo(d.id);
+                            }
+                        });
+
+                    charts.europe = { paths: svg.selectAll('path'), ready: true };
+                });
+        }
+
+        function showCountryInfo(countryId) {
+            const policy = countryPolicies[countryId];
+            if (!policy) return;
+            document.getElementById('country-name').textContent = policy.name;
+            document.getElementById('country-policy').textContent = policy.text;
+
+            // Also sync tabs
+            document.querySelectorAll('#europe-tab-bar .tab-item').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.country === countryId);
+            });
+            const tabContent = document.getElementById('europe-tab-content');
+            if (tabContent) tabContent.innerHTML = `<strong>${policy.name}</strong><br>${policy.text}`;
+        }
+
+        function switchEuropeTab(tabEl) {
+            document.querySelectorAll('#europe-tab-bar .tab-item').forEach(t => t.classList.remove('active'));
+            tabEl.classList.add('active');
+            showCountryInfo(tabEl.dataset.country);
+        }
+
+        function updateGraphic(sectionId, stepIndex) {
+            switch (sectionId) {
+                case 'hero':
+                    const heroIllusts = document.querySelectorAll('.hero-illust');
+                    heroIllusts.forEach(img => img.classList.remove('active'));
+                    if (stepIndex <= 1) {
+                        heroIllusts[0].classList.add('active');
+                    } else if (stepIndex <= 3) {
+                        heroIllusts[1].classList.add('active');
+                    } else {
+                        heroIllusts[2].classList.add('active');
+                    }
+                    // Hide scroll indicator after first step
+                    const indicator = document.querySelector('.scroll-indicator');
+                    if (indicator) indicator.style.opacity = stepIndex > 0 ? '0' : '1';
+                    break;
+                case 'butaforie':
+                    if (!charts.donut) {
+                        renderDonutChart();
+                    }
+                    if (stepIndex === 0) {
+                        animateDonut();
+                    }
+                    break;
+                case 'drepturi':
+                    const cards = document.querySelectorAll('#rights-container .rights-card');
+                    const isMobileCards = window.innerWidth <= 1024;
+                    cards.forEach((card, i) => {
+                        if (isMobileCards ? i === stepIndex : i <= stepIndex) {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                        }
+                    });
+                    break;
+                case 'abuzuri':
+                    const quoteDisplay = document.getElementById('abuse-quote-text');
+                    const contestStats = document.getElementById('contestation-stats');
+                    const quoteContainer = document.getElementById('abuse-quote-display');
+                    const abuseTimeline = document.getElementById('abuse-timeline');
+                    const timelineNodes = abuseTimeline.querySelectorAll('.timeline-node');
+
+                    if (stepIndex >= 1 && stepIndex <= 4) {
+                        quoteContainer.style.display = 'none';
+                        contestStats.style.display = 'none';
+                        abuseTimeline.style.display = 'block';
+                        timelineNodes.forEach((node, i) => {
+                            if (i < stepIndex) {
+                                node.style.opacity = '1';
+                                node.style.transform = 'translateY(0)';
+                            } else {
+                                node.style.opacity = '0';
+                                node.style.transform = 'translateY(20px)';
+                            }
+                        });
+                    } else if (stepIndex >= 5) {
+                        quoteContainer.style.display = 'none';
+                        abuseTimeline.style.display = 'none';
+                        contestStats.style.display = 'block';
+                        if (!charts.contestation) {
+                            renderContestationBar();
+                            charts.contestation = true;
+                        }
+                    } else {
+                        quoteContainer.style.display = 'block';
+                        contestStats.style.display = 'none';
+                        abuseTimeline.style.display = 'none';
+                        quoteDisplay.style.opacity = '0';
+                    }
+                    break;
+                case 'itm-data':
+                    const itmChartsContainer = document.getElementById('itm-charts-container');
+                    const tilemapContainer = document.getElementById('county-tilemap');
+
+                    if (stepIndex <= 1) {
+                        itmChartsContainer.style.display = 'block';
+                        tilemapContainer.style.display = 'none';
+                        if (!charts.itm) {
+                            renderItmCharts();
+                        }
+                    } else {
+                        itmChartsContainer.style.display = 'none';
+                        tilemapContainer.style.display = 'block';
+                        if (!charts.tilemap) {
+                            renderTilemap();
+                        }
+                    }
+                    break;
+                case 'ce-poti-face':
+                    const actionCards = document.querySelectorAll('#action-cards-container .action-card');
+                    const isMobileActions = window.innerWidth <= 1024;
+                    actionCards.forEach((card, i) => {
+                        if (isMobileActions ? i === stepIndex : i <= stepIndex) {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                        }
+                    });
+                    break;
+                case 'return-data':
+                    if (!charts.returnToWork) {
+                        renderReturnChart();
+                    }
+                    if (stepIndex === 0) {
+                        animateReturnChart();
+                    }
+                    break;
+                case 'europa':
+                    if (!charts.europe) {
+                        renderEuropeMap();
+                    }
+                    const countryIds = [null, '826', '276', '250', '40', '578'];
+                    if (stepIndex > 0 && stepIndex < countryIds.length) {
+                        showCountryInfo(countryIds[stepIndex]);
+                    }
+                    scrollActiveCountryId = (stepIndex > 0 && stepIndex < countryIds.length) ? countryIds[stepIndex] : null;
+                    if (charts.europe && charts.europe.ready) {
+                        charts.europe.paths.attr('fill', function(d) {
+                            if (!highlightCountryIds.has(d.id)) return '#e8e0d4';
+                            return d.id === scrollActiveCountryId ? '#714b3a' : '#FBBE3B';
+                        });
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // ===== INTERSECTION OBSERVER FOR FLOW SECTIONS =====
+        const observerOptions = { threshold: 0.15 };
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.flow-section .fade-in').forEach(el => {
+            fadeObserver.observe(el);
+        });
+
+        // ===== RESIZE HANDLER =====
+        window.addEventListener('resize', () => {
+            scrollers.forEach(s => s.resize());
+        });
+    </script>
+</body>
+</html>
