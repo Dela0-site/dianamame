@@ -2881,11 +2881,14 @@
                     insertBeforeStep(oug, 'butaforie', 3);
                 })();
 
-                // Drepturi
+                // Drepturi — cards right after the title heading, before the step 0 text
                 (function() {
                     const grid = document.getElementById('rights-container');
                     showAllChildren(grid, '.rights-card');
-                    insertBeforeStep(grid, 'drepturi', 0);
+                    const heading = document.querySelector('#drepturi .step[data-step="0"] .section-heading');
+                    if (heading) {
+                        heading.parentNode.insertBefore(grid, heading.nextSibling);
+                    }
                     const sourceLabel = document.querySelector('#drepturi .source-label');
                     if (sourceLabel) {
                         sourceLabel.style.position = 'static';
@@ -2900,15 +2903,18 @@
                     insertBeforeStep(container, 'ce-poti-face', 0);
                 })();
 
-                // Abuzuri
+                // Abuzuri — image right after "Te calc în picioare!" heading, before text
                 (function() {
-                    const justice = document.getElementById('abuse-justice-illust');
-                    showElement(justice);
-                    insertBeforeStep(justice, 'abuzuri', 0);
-
                     const stats = document.getElementById('contestation-stats');
                     showElement(stats);
                     insertBeforeStep(stats, 'abuzuri', 1);
+
+                    const justice = document.getElementById('abuse-justice-illust');
+                    showElement(justice);
+                    const heading = document.querySelector('#abuzuri .step[data-step="0"] .section-heading');
+                    if (heading) {
+                        heading.parentNode.insertBefore(justice, heading.nextSibling);
+                    }
                     renderContestationBar();
                     charts.contestation = true;
 
@@ -2916,6 +2922,10 @@
                     showElement(timeline);
                     showAllChildren(timeline, '.timeline-node');
                     insertBeforeStep(timeline, 'abuzuri', 2);
+
+                    // Add spacing above step 2 (Valeria's story)
+                    const step2 = document.querySelector('#abuzuri .step[data-step="2"]');
+                    if (step2) step2.style.marginTop = '2rem';
 
                     const quoteDisplay = document.getElementById('abuse-quote-display');
                     if (quoteDisplay) quoteDisplay.style.display = 'none';
