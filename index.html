@@ -2349,33 +2349,35 @@
         };
 
         const tileLayout = [
-            { id: 'SM', row: 0, col: 1 }, { id: 'MM', row: 0, col: 2 }, { id: 'BT', row: 0, col: 4 },
-            { id: 'SJ', row: 1, col: 1 }, { id: 'BN', row: 1, col: 2 }, { id: 'SV', row: 0, col: 5 },
-            { id: 'BH', row: 1, col: 0 }, { id: 'CJ', row: 1, col: 2 }, { id: 'MS', row: 1, col: 3 },
-            { id: 'NT', row: 1, col: 5 }, { id: 'IS', row: 1, col: 6 },
-            { id: 'AR', row: 2, col: 0 }, { id: 'HD', row: 2, col: 1 }, { id: 'AB', row: 2, col: 2 },
-            { id: 'SB', row: 2, col: 3 }, { id: 'HR', row: 1, col: 4 },
-            { id: 'BV', row: 2, col: 4 }, { id: 'CV', row: 2, col: 5 },
-            { id: 'BC', row: 1, col: 5 }, { id: 'VS', row: 1, col: 7 },
-            { id: 'TM', row: 3, col: 0 }, { id: 'CS', row: 3, col: 1 },
-            { id: 'GJ', row: 3, col: 2 }, { id: 'VL', row: 3, col: 3 },
-            { id: 'AG', row: 3, col: 4 }, { id: 'DB', row: 3, col: 5 },
-            { id: 'PH', row: 3, col: 6 }, { id: 'BZ', row: 3, col: 7 },
-            { id: 'VN', row: 2, col: 6 }, { id: 'GL', row: 2, col: 7 },
-            { id: 'MH', row: 4, col: 1 }, { id: 'DJ', row: 4, col: 2 },
-            { id: 'OT', row: 4, col: 3 }, { id: 'TR', row: 4, col: 4 },
-            { id: 'GR', row: 4, col: 5 }, { id: 'B', row: 4, col: 6 },
-            { id: 'IF', row: 4, col: 7 },
-            { id: 'IL', row: 5, col: 6 }, { id: 'CL', row: 5, col: 5 },
-            { id: 'CT', row: 5, col: 7 }, { id: 'TL', row: 5, col: 8 },
-            { id: 'BR', row: 5, col: 7 }
+            { id: 'SM', row: 0, col: 3 }, { id: 'BT', row: 0, col: 6 },
+            { id: 'BH', row: 1, col: 2 }, { id: 'MM', row: 1, col: 3 },
+            { id: 'BN', row: 1, col: 4 }, { id: 'SV', row: 1, col: 5 },
+            { id: 'NT', row: 1, col: 6 }, { id: 'IS', row: 1, col: 7 },
+            { id: 'AR', row: 2, col: 1 }, { id: 'SJ', row: 2, col: 2 },
+            { id: 'CJ', row: 2, col: 3 }, { id: 'MS', row: 2, col: 4 },
+            { id: 'HR', row: 2, col: 5 }, { id: 'BC', row: 2, col: 6 },
+            { id: 'VS', row: 2, col: 7 },
+            { id: 'TM', row: 3, col: 0 }, { id: 'HD', row: 3, col: 1 },
+            { id: 'AB', row: 3, col: 2 }, { id: 'SB', row: 3, col: 3 },
+            { id: 'BV', row: 3, col: 4 }, { id: 'CV', row: 3, col: 5 },
+            { id: 'VN', row: 3, col: 6 }, { id: 'GL', row: 3, col: 7 },
+            { id: 'CS', row: 4, col: 1 }, { id: 'GJ', row: 4, col: 2 },
+            { id: 'VL', row: 4, col: 3 }, { id: 'AG', row: 4, col: 4 },
+            { id: 'PH', row: 4, col: 5 }, { id: 'BZ', row: 4, col: 6 },
+            { id: 'BR', row: 4, col: 7 }, { id: 'TL', row: 4, col: 8 },
+            { id: 'MH', row: 5, col: 2 }, { id: 'DJ', row: 5, col: 3 },
+            { id: 'DB', row: 5, col: 4 }, { id: 'B', row: 5, col: 5 },
+            { id: 'IF', row: 5, col: 6 }, { id: 'IL', row: 5, col: 7 },
+            { id: 'CT', row: 5, col: 8 },
+            { id: 'OT', row: 6, col: 3 }, { id: 'TR', row: 6, col: 4 },
+            { id: 'GR', row: 6, col: 5 }, { id: 'CL', row: 6, col: 6 }
         ];
 
         function renderTilemap() {
             const tileSize = 52;
             const gap = 3;
             const cols = 9;
-            const rows = 6;
+            const rows = 7;
             const width = cols * (tileSize + gap);
             const height = rows * (tileSize + gap);
 
@@ -2385,7 +2387,7 @@
                 .interpolator(d3.interpolateRgb('#f5f0e8', '#FBBE3B'));
 
             const svg = d3.select('#county-tilemap').append('svg')
-                .attr('viewBox', `0 0 ${width} ${height + 30}`)
+                .attr('viewBox', `0 0 ${width} ${height + 45}`)
                 .attr('role', 'img')
                 .attr('aria-label', 'Harta controalelor ITM pe județe');
 
@@ -2395,7 +2397,13 @@
                 .style('font-weight', '600').style('fill', '#714b3a')
                 .text('Disproporția controalelor pe județe (2019-2025)');
 
-            const g = svg.append('g').attr('transform', 'translate(0, 25)');
+            svg.append('text').attr('x', width / 2).attr('y', 32)
+                .attr('text-anchor', 'middle')
+                .style('font-family', "'Titillium Web', sans-serif").style('font-size', '11px')
+                .style('fill', '#999')
+                .text('Click pe hartă pentru detalii');
+
+            const g = svg.append('g').attr('transform', 'translate(0, 40)');
 
             const tooltip = d3.select('#county-tilemap').append('div')
                 .style('position', 'absolute').style('background', 'white')
